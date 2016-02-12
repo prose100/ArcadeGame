@@ -1,134 +1,134 @@
 (function() {
-
-  // "use strict";
-
-  $(document).ready(function(){
-
-    var defaults = {
-      hero: 'hero',
-      heroWidth: 50,
-      heroHeight: 50,
-      stopClass: '.stop'
-    };
-
-    function ArcadeGame(element, options) {
-    
-      settings = $.extend({}, defaults, options);
-
-      var $this = $(element); //start button
-      var that = this; //arcadegame
-      
-      $this.click(function(){
-        that.start();
-      })
-    }
-
-    ArcadeGame.prototype.start = function() {
-      hero = new Hero(1);
-      var targetElement = document.body;
-
-      targetElement.addEventListener('keydown', function (event) {
-           switch (event.keyCode) {
-            case 13:
-              //***fire bullet
-              break;
-            case 37:
-              hero.move('left');
-              break;
-            case 39:
-              hero.move('right');
-              break;
-           };
-        });
      
-      var stop = setInterval(function() {
-          play();
-        }, 100); 
+  var defaults = {
+    hero: 'hero',
+    heroWidth: 50,
+    heroHeight: 50,
+    stopClass: '.stop'
+  };
 
-      function play() {
-          if (gameIsOver()) {clearInterval(stop)};
-          $(".stop").click(function(){clearInterval(stop)});
-        
-          updateBoard();
-          //run sequence of steps to keep game going
-      }
+  function ArcadeGame(element, options) {
+  
+    settings = $.extend({}, defaults, options);
 
-      //may put these functions in separate Arcade.prototype
-      function gameIsOver() {
-        return hero.isDead(); 
-      }
-
-      function updateBoard() {
-        hero.draw();
-      }        
-    }
+    var $this = $(element); //start button
+    var that = this; //arcadegame
     
-    function Position(x,y) {
-      this.x = x;
-      this.y = y;
+    $this.click(function(){
+      that.start();
+    })
+  }
+
+  ArcadeGame.prototype.start = function() {
+    hero = new Hero(1);
+    var targetElement = document.body;
+
+    targetElement.addEventListener('keydown', function (event) {
+         switch (event.keyCode) {
+          case 13:
+            //***fire bullet
+            break;
+          case 37:
+            hero.move('left');
+            break;
+          case 39:
+            hero.move('right');
+            break;
+         };
+      });
+   
+    var stop = setInterval(function() {
+        play();
+      }, 100); 
+
+    function play() {
+        if (gameIsOver()) {clearInterval(stop)};
+        $(".stop").click(function(){clearInterval(stop)});
+      
+        updateBoard();
+        //run sequence of steps to keep game going
     }
 
-    Position.prototype.setPositionX = function(x) {
-      this.position.x = x;
+    //may put these functions in separate Arcade.prototype
+    function gameIsOver() {
+      return hero.isDead(); 
     }
 
-    Position.prototype.setPositionY = function(y) {
-      this.position.y = y;
-    }
+    function updateBoard() {
+      hero.draw();
+    }        
+  }
+  
+  // function Position(x,y) {
+  //   this.x = x;
+  //   this.y = y;
+  // }
 
-    Position.prototype.getPositionX = function() {
-      return this.position.x;
-    }
-    Position.prototype.getPositionY = function() {
-      return this.position.y;
-    }
+  // Position.prototype.setPositionX = function(x) {
+  //   this.x = x;
+  // }
 
-    function Character(image, position) {
-      this.image = image;
-      this.position = position;
-    }
+  // Position.prototype.setPositionY = function(y) {
+  //   this.y = y;
+  // }
 
-    Character.prototype = Object.create(Hero.prototype);
+  // Position.prototype.getPositionX = function() {
+  //   return this.x;
+  // }
+  // Position.prototype.getPositionY = function() {
+  //   return this.y;
+  // }
 
-    function Hero(lives) {
-      var $hero = $('<img />', {
-                  src: 'img/hero.gif'})
-                  .addClass(settings.hero)
-                  .css({'position':'absolute'})
-                  .appendTo($('.gameBoard'));
-      var position = new Position(($(window).width()/2), ($(window).height()-settings.heroHeight));
+  // function Character(image, position) {
+  //   this.image = image;
+  //   this.position = position;
+  // }
 
-      Character.call(this, $hero, position);
-      this.lives = lives;
-    }
+  // Character.prototype = Object.create(Hero.prototype);
 
-    Character.prototype.draw = function() {
-      this.image.css({left: this.position.x, top: this.position.y});
-    }
+  // Character.prototype.getImage = function() {
+  //   console.log(this.image);
+  //   return this.image;
+  // }
+  
+  // Character.prototype.draw = function() {
+  //   (Character.prototype.getImage.call(this)).css({left: Position.prototype.getPositionX.call(this.position), 
+  //                   top: Position.prototype.getPositionY.call(this.position)});
+  // }
 
-    Hero.prototype.draw = function() {
-      Character.prototype.draw.call(this);
-    }
+  // function Hero(lives) {
+  //   var $hero = $('<img />', {
+  //               src: 'img/hero.gif'})
+  //               .addClass(settings.hero)
+  //               .css({'position':'absolute'})
+  //               .appendTo($('.gameBoard'));
+  //   var position = new Position(($(window).width()/2), ($(window).height()-settings.heroHeight));
 
-    Hero.prototype.isDead = function() {
-      ++this.lives;
-      console.log(this.lives);
-      return this.lives == 80;
-    }
+  //   Character.call(this, $hero, position);
+  //   this.lives = lives;
+  // }
 
-    Hero.prototype.move = function(direction) {
-      if (direction == 'right') {
-        Position.prototype.setPositionX.call(this, (Position.prototype.getPositionX.call(this) + 100));
-      } else if (direction == 'left'){
-        Position.prototype.setPositionX.call(this, (Position.prototype.getPositionX.call(this) - 100));
-      }
-    }
+  // Hero.prototype.draw = function() {
+  //   Character.prototype.draw.call(this);
+  // }
 
-    $.fn.arcadegame = function(options) {
-      return this.each(function() {
-        new ArcadeGame(this, options);
-      })
-    };
-  });
-})();
+  // Hero.prototype.isDead = function() {
+  //   ++this.lives;
+  //   console.log(this.lives);
+  //   return this.lives == 50;
+  // }
 
+  // Hero.prototype.move = function(direction) {
+  //   if (direction == 'right') {
+  //     Position.prototype.setPositionX.call(this.position, (Position.prototype.getPositionX.call(this.position) + 100));
+  //   } else if (direction == 'left'){
+  //     Position.prototype.setPositionX.call(this.position, (Position.prototype.getPositionX.call(this.position) - 100));
+  //   }
+  // }
+
+  $.fn.arcadegame = function(options) {
+    return this.each(function() {
+      new ArcadeGame(this, options);
+    })
+  };
+})();  
