@@ -5,6 +5,8 @@
     alienwimpy_class: 'alienwimpy',
     alienstubbron_class: 'alienstubborn',
     alientitan_class: 'alientitan',
+    alienbullet_class: 'alienbullet',
+    alienbullet_class: 'herobullet',
     characterWidth: 20,
     characterHeight: 20,
     stopClass: '.stop'
@@ -27,7 +29,9 @@
     var alienwimpy = new AlienWimpy();
     var alienstubborn = new AlienStubborn();
     var alientitan = new AlienTitan();
-    
+    var alienbullet = new AlienBullet();
+    var herobullet = new HeroBullet();
+
     var targetElement = document.body;
 
     targetElement.addEventListener('keydown', function (event) {
@@ -66,6 +70,8 @@
       alienwimpy.draw();
       alienstubborn.draw();
       alientitan.draw();
+      alienbullet.draw();
+      herobullet.draw();
     }        
   }
   
