@@ -3,6 +3,7 @@
   var defaults = {
     hero_class: 'hero',
     alienwimpy_class: 'alienwimpy',
+    alienstubbron_class: 'alienstubborn',
     alientitan_class: 'alientitan',
     characterWidth: 20,
     characterHeight: 20,
@@ -24,6 +25,7 @@
   ArcadeGame.prototype.start = function() {
     var hero = new Hero(1);
     var alienwimpy = new AlienWimpy();
+    var alienstubborn = new AlienStubborn();
     var alientitan = new AlienTitan();
     
     var targetElement = document.body;
@@ -62,6 +64,7 @@
     function updateBoard() {
       hero.draw();
       alienwimpy.draw();
+      alienstubborn.draw();
       alientitan.draw();
     }        
   }

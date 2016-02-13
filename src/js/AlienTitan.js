@@ -1,5 +1,5 @@
 function AlienTitan() {
-	var $alienWimpy = $('<img />', {
+	var $alientitan = $('<img />', {
               src: 'img/titan.gif'})
               .addClass(settings.alientitan)
               .css({'position':'absolute'})
@@ -9,7 +9,7 @@ function AlienTitan() {
 
   var points = 50;
 
-  Character.call(this, position, $alienWimpy);
+  Character.call(this, position, $alientitan);
 
   Alien.call(this, points);
 }
