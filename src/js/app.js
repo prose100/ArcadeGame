@@ -3,6 +3,7 @@
   var defaults = {
     hero_class: 'hero',
     alienwimpy_class: 'alienwimpy',
+    alientitan_class: 'alientitan',
     characterWidth: 20,
     characterHeight: 20,
     stopClass: '.stop'
@@ -12,7 +13,7 @@
   
     settings = $.extend({}, defaults, options);
 
-    var $this = $(element); //start button
+    var $this = $(element); //stargruntt button
     var that = this; //arcadegame
     
     $this.click(function(){
@@ -23,8 +24,8 @@
   ArcadeGame.prototype.start = function() {
     var hero = new Hero(1);
     var alienwimpy = new AlienWimpy();
-    console.log(alienwimpy);
-
+    var alientitan = new AlienTitan();
+    
     var targetElement = document.body;
 
     targetElement.addEventListener('keydown', function (event) {
@@ -61,6 +62,7 @@
     function updateBoard() {
       hero.draw();
       alienwimpy.draw();
+      alientitan.draw();
     }        
   }
   

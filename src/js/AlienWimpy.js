@@ -6,7 +6,6 @@ function AlienWimpy() {
               .appendTo($('.gameBoard'));
 
   var position = new Position(($(window).width()-settings.characterWidth), 0);
-  console.log(position);
 
   var points = 10;
 
