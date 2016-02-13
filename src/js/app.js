@@ -1,9 +1,10 @@
 (function() {
      
   var defaults = {
-    hero: 'hero',
-    heroWidth: 50,
-    heroHeight: 50,
+    hero_class: 'hero',
+    alienwimpy_class: 'alienwimpy',
+    characterWidth: 20,
+    characterHeight: 20,
     stopClass: '.stop'
   };
 
@@ -20,7 +21,10 @@
   }
 
   ArcadeGame.prototype.start = function() {
-    hero = new Hero(1);
+    var hero = new Hero(1);
+    var alienwimpy = new AlienWimpy();
+    console.log(alienwimpy);
+
     var targetElement = document.body;
 
     targetElement.addEventListener('keydown', function (event) {
@@ -56,6 +60,7 @@
 
     function updateBoard() {
       hero.draw();
+      alienwimpy.draw();
     }        
   }
   

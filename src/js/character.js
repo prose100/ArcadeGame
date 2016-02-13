@@ -1,12 +1,12 @@
-function Character(image, position) {
-  this.image = image;
+function Character(position, image) {
   this.position = position;
+  this.image = image;
 }
 
 Character.prototype = Object.create(Hero.prototype);
+Character.prototype = Object.create(Alien.prototype);
 
 Character.prototype.getImage = function() {
-  console.log(this.image);
   return this.image;
 }
 
