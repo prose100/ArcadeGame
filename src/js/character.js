@@ -7,6 +7,7 @@ Character.prototype = Object.create(Hero.prototype);
 Character.prototype = Object.create(Alien.prototype);
 Character.prototype = Object.create(Bullet.prototype);
 
+
 Character.prototype.getImage = function() {
   return this.image;
 }

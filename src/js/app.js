@@ -26,11 +26,15 @@
 
   ArcadeGame.prototype.start = function() {
     var hero = new Hero(1);
-    var alienwimpy = new AlienWimpy();
-    var alienstubborn = new AlienStubborn();
-    var alientitan = new AlienTitan();
-    var alienbullet = new AlienBullet();
-    var herobullet = new HeroBullet();
+    var level = 0;
+    var numberofaliens = 0;
+    createFleet(level);
+
+    // var alienwimpy = new AlienWimpy();
+    // var alienstubborn = new AlienStubborn();
+    // var alientitan = new AlienTitan();
+    // var alienbullet = new AlienBullet();
+    // var herobullet = new HeroBullet();
 
     var targetElement = document.body;
 
@@ -57,7 +61,16 @@
         $(".stop").click(function(){clearInterval(stop)});
       
         updateBoard();
-        //run sequence of steps to keep game going
+        //run sequence of steps to keep game going:
+        //moveAliens();  
+        //moveBullets();
+        //checkCollisions(); //heroBullets and alienBullets 
+                             //Aliens and heroBullets
+                             //Hero and alienBullets
+        //checkAlienEndHeroLife();
+        // if checkLevelComplete();
+          //level++
+          var alienfleet = createFleet(level);
     }
 
     //may put these functions in separate Arcade.prototype
@@ -65,13 +78,31 @@
       return hero.isDead(); 
     }
 
+    function createFleet(level) {
+      var i = 1;
+      var alienarray = [];
+      if(level==0) {
+        for (i; i<11; i++) {
+          alienarray[i] = new AlienWimpy(new Position($(window).width()*(20-i)/(20), 25));
+        }
+      }
+      if(level==1) {
+        for (i;i<10; i++) {
+          alienarray = alienarray[new AlienStubborn[i]];
+        }
+      }
+      console.log(alienarray);
+      var alienfleet = new Fleet(alienarray);
+      alienfleet.draw();
+    }
+
     function updateBoard() {
       hero.draw();
-      alienwimpy.draw();
-      alienstubborn.draw();
-      alientitan.draw();
-      alienbullet.draw();
-      herobullet.draw();
+      // alienwimpy.draw();
+      // alienstubborn.draw();
+      // alientitan.draw();
+      // alienbullet.draw();
+      // herobullet.draw();
     }        
   }
   
