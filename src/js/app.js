@@ -25,23 +25,25 @@
   }
 
   ArcadeGame.prototype.start = function() {
-    var hero = new Hero(1);
     var level = 0;
-    var numberofaliens = 0;
-    createFleet(level);
 
-    // var alienwimpy = new AlienWimpy();
-    // var alienstubborn = new AlienStubborn();
-    // var alientitan = new AlienTitan();
-    // var alienbullet = new AlienBullet();
-    // var herobullet = new HeroBullet();
+    var hero = new Hero(2);    
+    var numberofaliens = 0;
+    var alienfleet = createFleet(level);
+
+    var herobulletfleet = [];
+    var herobulletfleet = new Fleet(herobulletfleet);
+    
+    var alienbulletfleet = [];
+    var alienbulletfleet = new Fleet(alienbulletfleet);
 
     var targetElement = document.body;
 
     targetElement.addEventListener('keydown', function (event) {
          switch (event.keyCode) {
           case 13:
-            //***fire bullet
+            var herobullet = hero.fire();
+            herobullet.draw();
             break;
           case 37:
             hero.move('left');
@@ -63,14 +65,14 @@
         updateBoard();
         //run sequence of steps to keep game going:
         //moveAliens();  
-        //moveBullets();
+        //moveHeroBullets();
+        //moveAlienBullets();
         //checkCollisions(); //heroBullets and alienBullets 
                              //Aliens and heroBullets
                              //Hero and alienBullets
         //checkAlienEndHeroLife();
         // if checkLevelComplete();
           //level++
-          var alienfleet = createFleet(level);
     }
 
     //may put these functions in separate Arcade.prototype
@@ -87,91 +89,19 @@
         }
       }
       if(level==1) {
-        for (i;i<10; i++) {
-          alienarray = alienarray[new AlienStubborn[i]];
+        for (i; i<11; i++) {
+          alienarray[i] = new AlienStubborn(new Position($(window).width()*(20-i)/(20), 25));
         }
       }
-      console.log(alienarray);
       var alienfleet = new Fleet(alienarray);
-      alienfleet.draw();
+      return alienfleet;
     }
 
     function updateBoard() {
       hero.draw();
-      // alienwimpy.draw();
-      // alienstubborn.draw();
-      // alientitan.draw();
-      // alienbullet.draw();
-      // herobullet.draw();
+      alienfleet.draw();
     }        
   }
-  
-  // function Position(x,y) {
-  //   this.x = x;
-  //   this.y = y;
-  // }
-
-  // Position.prototype.setPositionX = function(x) {
-  //   this.x = x;
-  // }
-
-  // Position.prototype.setPositionY = function(y) {
-  //   this.y = y;
-  // }
-
-  // Position.prototype.getPositionX = function() {
-  //   return this.x;
-  // }
-  // Position.prototype.getPositionY = function() {
-  //   return this.y;
-  // }
-
-  // function Character(image, position) {
-  //   this.image = image;
-  //   this.position = position;
-  // }
-
-  // Character.prototype = Object.create(Hero.prototype);
-
-  // Character.prototype.getImage = function() {
-  //   console.log(this.image);
-  //   return this.image;
-  // }
-  
-  // Character.prototype.draw = function() {
-  //   (Character.prototype.getImage.call(this)).css({left: Position.prototype.getPositionX.call(this.position), 
-  //                   top: Position.prototype.getPositionY.call(this.position)});
-  // }
-
-  // function Hero(lives) {
-  //   var $hero = $('<img />', {
-  //               src: 'img/hero.gif'})
-  //               .addClass(settings.hero)
-  //               .css({'position':'absolute'})
-  //               .appendTo($('.gameBoard'));
-  //   var position = new Position(($(window).width()/2), ($(window).height()-settings.heroHeight));
-
-  //   Character.call(this, $hero, position);
-  //   this.lives = lives;
-  // }
-
-  // Hero.prototype.draw = function() {
-  //   Character.prototype.draw.call(this);
-  // }
-
-  // Hero.prototype.isDead = function() {
-  //   ++this.lives;
-  //   console.log(this.lives);
-  //   return this.lives == 50;
-  // }
-
-  // Hero.prototype.move = function(direction) {
-  //   if (direction == 'right') {
-  //     Position.prototype.setPositionX.call(this.position, (Position.prototype.getPositionX.call(this.position) + 100));
-  //   } else if (direction == 'left'){
-  //     Position.prototype.setPositionX.call(this.position, (Position.prototype.getPositionX.call(this.position) - 100));
-  //   }
-  // }
 
   $.fn.arcadegame = function(options) {
     return this.each(function() {

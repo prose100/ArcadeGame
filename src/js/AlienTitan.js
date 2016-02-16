@@ -1,17 +1,14 @@
-function AlienTitan() {
+function AlienTitan(position) {
 	var $alientitan = $('<img />', {
               src: 'img/titan.gif'})
               .addClass(settings.alientitan)
-              .css({'position':'absolute'})
+              .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-
-  var position = new Position(($(window).width()-settings.characterWidth)-50, 0);
 
   var points = 50;
 
-  Character.call(this, position, $alientitan);
-
   Alien.call(this, points);
+  Character.call(this, position, $alientitan);
 }
 
 AlienTitan.prototype.draw = function() {

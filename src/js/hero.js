@@ -2,7 +2,7 @@ function Hero(lives) {
   var $hero = $('<img />', {
               src: 'img/hero.gif'})
               .addClass(settings.hero_class)
-              .css({'position':'absolute'})
+              .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
   var position = new Position(($(window).width()*10/20),
                                ($(window).height()-settings.characterHeight));
@@ -30,4 +30,14 @@ function Hero(lives) {
         Position.prototype.setPositionX.call(this.position, 
         (Position.prototype.getPositionX.call(this.position) - $(window).width()/20));
     }
-}
+  }
+
+  Hero.prototype.fire = function() {
+      console.log(Position.prototype.getPositionX.call(this.position));
+      var bullet = new HeroBullet(new Position(Position.prototype.getPositionX.call(this.position),
+                                           Position.prototype.getPositionY.call(this.position)-settings.characterHeight));
+    return bullet;
+  }
+
+
+

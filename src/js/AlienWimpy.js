@@ -2,7 +2,7 @@ function AlienWimpy(position) {
 	var $alienWimpy = $('<img />', {
               src: 'img/wimpy.gif'})
               .addClass(settings.alienwimpy)
-              .css({'position':'absolute'})
+              .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
 
   var points = 10;

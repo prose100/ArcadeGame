@@ -4,7 +4,6 @@ function AlienBullet() {
               .addClass(settings.alienbullet_class)
               .css({'position':'absolute'})
               .appendTo($('.gameBoard'));
-  var position = new Position(($(window).width()-settings.characterWidth-200), 0);
 
 	Character.call(this, position, $alienbullet);
 }

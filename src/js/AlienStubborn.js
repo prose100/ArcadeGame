@@ -1,17 +1,14 @@
-function AlienStubborn() {
+function AlienStubborn(position) {
 	var $alienstubborn = $('<img />', {
               src: 'img/stubborn.gif'})
               .addClass(settings.alienstubborn)
-              .css({'position':'absolute'})
+              .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-
-  var position = new Position(($(window).width()-settings.characterWidth)-100, 0);
 
   var points = 25;
 
-  Character.call(this, position, $alienstubborn);
-
   Alien.call(this, points);
+  Character.call(this, position, $alienstubborn);
 }
 
 AlienStubborn.prototype.draw = function() {

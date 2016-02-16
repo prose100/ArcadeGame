@@ -14,5 +14,5 @@ Character.prototype.getImage = function() {
 
 Character.prototype.draw = function() {
   (Character.prototype.getImage.call(this)).css({left: Position.prototype.getPositionX.call(this.position), 
-                  top: Position.prototype.getPositionY.call(this.position)});
+                  top: Position.prototype.getPositionY.call(this.position), 'display': 'block'});
 }
