@@ -14,3 +14,9 @@ function AlienWimpy(position) {
 AlienWimpy.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
+
+AlienWimpy.prototype.fire = function() {
+  var bullet = new AlienBullet(new Position(Position.prototype.getPositionX.call(this.position),
+                                           Position.prototype.getPositionY.call(this.position)+settings.characterHeight));
+  return bullet;
+}

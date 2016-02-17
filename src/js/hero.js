@@ -17,7 +17,7 @@ function Hero(lives) {
 
   Hero.prototype.isDead = function() {
     ++this.lives;
-    return this.lives == 20;
+    return this.lives == 40;
   }
 
   Hero.prototype.move = function(direction) {
@@ -33,7 +33,7 @@ function Hero(lives) {
   }
 
   Hero.prototype.fire = function() {
-      console.log(Position.prototype.getPositionX.call(this.position));
+      console.log(this.position);
       var bullet = new HeroBullet(new Position(Position.prototype.getPositionX.call(this.position),
                                            Position.prototype.getPositionY.call(this.position)-settings.characterHeight));
     return bullet;
