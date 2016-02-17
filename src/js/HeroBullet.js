@@ -4,8 +4,9 @@ function HeroBullet(position) {
               .addClass(settings.herobullet_class)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));; 
+  var direction = 'up';
 
-	Character.call(this, position, $herobullet);
+	Character.call(this, position, $herobullet, direction);
 }
 
 HeroBullet.prototype.draw = function() {

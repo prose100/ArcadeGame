@@ -45,7 +45,6 @@
         case 38:
           var bullet = hero.fire();
           herobullets.push(bullet);
-          console.log(herobullets);
           break;
         case 37:
           hero.move('left');
@@ -58,7 +57,7 @@
   
     var stop = setInterval(function() {
         play();
-      }, 200); 
+      }, 300); 
 
     function play() {
         if (gameIsOver()) {clearInterval(stop)};
@@ -66,8 +65,7 @@
         updateBoard();
         alienbullets = alienfleet.fire(0.02, alienbullets);
         //run sequence of steps to keep game going:
-        //moveAliens();  
-        //moveAlienBullets();
+        move();
         //checkCollisions(); //heroBullets and alienBullets 
                              //Aliens and heroBullets
                              //Hero and alienBullets
@@ -82,19 +80,26 @@
 
     function createFleet(level) {
       var i = 0;
+      var j = 1;
       var alienarray = [];
       if(level==0) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienWimpy(new Position($(window).width()*(19-i)/(20), 25));
+          alienarray[i] = new AlienWimpy(new Position(19-i, j));
         }
       }
       if(level==1) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienStubborn(new Position($(window).width()*(19-i)/(20), 25));
+          alienarray[i] = new AlienStubborn(new Position(19-i, j));
         }
       }
       var alienfleet = new Fleet(alienarray);
       return alienfleet;
+    }
+
+    function move() {
+      alienfleet.move();
+      alienbullets.move();
+      herobullets.move();
     }
 
     function updateBoard() {
@@ -102,8 +107,6 @@
       alienfleet.draw();
       herobullets.draw();
       alienbullets.draw();
-
-      // alienbulletsfleet.draw();
     }        
   }
 

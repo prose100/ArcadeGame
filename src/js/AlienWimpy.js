@@ -4,11 +4,11 @@ function AlienWimpy(position) {
               .addClass(settings.alienwimpy)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-
   var points = 10;
+  var direction = 'left';
 
   Alien.call(this, points);
-  Character.call(this, position, $alienWimpy);
+  Character.call(this, position, $alienWimpy, direction);
 }
 
 AlienWimpy.prototype.draw = function() {
@@ -17,6 +17,6 @@ AlienWimpy.prototype.draw = function() {
 
 AlienWimpy.prototype.fire = function() {
   var bullet = new AlienBullet(new Position(Position.prototype.getPositionX.call(this.position),
-                                           Position.prototype.getPositionY.call(this.position)+settings.characterHeight));
+                                           Position.prototype.getPositionY.call(this.position)+1));
   return bullet;
 }

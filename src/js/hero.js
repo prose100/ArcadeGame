@@ -4,8 +4,7 @@ function Hero(lives) {
               .addClass(settings.hero_class)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-  var position = new Position(($(window).width()*10/20),
-                               ($(window).height()-settings.characterHeight));
+  var position = new Position(10, 19);
 
   Character.call(this, position, $hero);
   this.lives = lives;
@@ -17,25 +16,25 @@ function Hero(lives) {
 
   Hero.prototype.isDead = function() {
     ++this.lives;
-    return this.lives == 40;
+    return this.lives == 30;
   }
 
   Hero.prototype.move = function(direction) {
     if ((direction == 'right') && 
-       (Position.prototype.getPositionX.call(this.position) + $(window).width()/20 < $(window).width())) {
+       (Position.prototype.getPositionX.call(this.position) < 19)) {
           Position.prototype.setPositionX.call(this.position, 
-          (Position.prototype.getPositionX.call(this.position) + $(window).width()/20));
+          (Position.prototype.getPositionX.call(this.position)) + 1);
     } else if ((direction == 'left') &&
-      (Position.prototype.getPositionX.call(this.position) - $(window).width()/20 > 0)) {
+      (Position.prototype.getPositionX.call(this.position) > 1)) {
         Position.prototype.setPositionX.call(this.position, 
-        (Position.prototype.getPositionX.call(this.position) - $(window).width()/20));
+        (Position.prototype.getPositionX.call(this.position)) - 1);
     }
   }
 
   Hero.prototype.fire = function() {
       console.log(this.position);
       var bullet = new HeroBullet(new Position(Position.prototype.getPositionX.call(this.position),
-                                           Position.prototype.getPositionY.call(this.position)-settings.characterHeight));
+                                           (Position.prototype.getPositionY.call(this.position))-1));
     return bullet;
   }
 

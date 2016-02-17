@@ -4,8 +4,9 @@ function AlienBullet(position) {
               .addClass(settings.alienbullet_class)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
+  var direction = 'down';            
 
-	Character.call(this, position, $alienbullet);
+	Character.call(this, position, $alienbullet, direction);
 }
 
 AlienBullet.prototype.draw = function() {
