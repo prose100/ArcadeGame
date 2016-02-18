@@ -100,7 +100,6 @@ Fleet.prototype.checkCollisions = function(bullets) {
 				== (Position.prototype.getPositionX.call(bullets.fleet[j].position)) && 
 				(Position.prototype.getPositionY.call(this.fleet[i].position)) 
 				== (Position.prototype.getPositionY.call(bullets.fleet[j].position))) {
-					console.log('collide');
 					this.fleet[i].image.remove();
 					this.fleet[i].hitImage.css({'display': 'block'});
 					this.fleet.splice(i, 1);

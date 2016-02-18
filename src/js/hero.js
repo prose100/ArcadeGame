@@ -17,11 +17,15 @@ function Hero(lives) {
 
   Hero.prototype.draw = function() {
     Character.prototype.draw.call(this);
+
+    this.hitImage.css(
+      {left: Position.prototype.getPositionX.call(this.position)*($(window).width())/20, 
+       top: Position.prototype.getPositionY.call(this.position)*($(window).height())/20});
   }
 
   Hero.prototype.isDead = function() {
     ++this.lives;
-    return this.lives == 25;
+    return this.lives == 225;
   }
 
   Hero.prototype.move = function(direction) {
@@ -42,5 +46,17 @@ function Hero(lives) {
     return bullet;
   }
 
-
-
+  Hero.prototype.checkCollisions = function(killer) {
+    if (killer.fleet.length) {
+      for (var i=0; i<killer.fleet.length; i++) {
+        if ((Position.prototype.getPositionX.call(this.position) ==
+        Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
+        (Position.prototype.getPositionY.call(this.position) ==
+        Position.prototype.getPositionY.call(killer.fleet[i].position))) {
+          --this.lives;
+          this.image.remove();
+          this.hitImage.css({'display': 'block'});
+        }
+      } 
+    }
+  }

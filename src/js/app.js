@@ -58,13 +58,13 @@
   
     var stop = setInterval(function() {
         play();
-      }, 300); 
+      }, 50); 
 
     function play() {
         if (gameIsOver()) {clearInterval(stop)};
         $(".stop").click(function(){clearInterval(stop)});
         updateBoard();
-        alienbullets = aliens.fire(0.02, alienbullets);
+        alienbullets = aliens.fire(0.0, alienbullets);
         //run sequence of steps to keep game going:
         checkCollisions();
         move();
@@ -106,7 +106,8 @@
 
     function checkCollisions() {
       aliens.checkCollisions(herobullets);
-      // hero.checkCollisions(alienbullets, alienfleet);
+      hero.checkCollisions(alienbullets);
+      hero.checkCollisions(aliens);
     }
 
     function updateBoard() {
