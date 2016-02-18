@@ -1,5 +1,6 @@
-function Alien(points) {
+function Alien(points, hitImage) {
   this.points = points;
+  this.hitImage = hitImage;
 }
 
 Alien.prototype = Object.create(AlienWimpy.prototype);

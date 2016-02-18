@@ -6,8 +6,13 @@ function AlienWimpy(position) {
               .appendTo($('.gameBoard'));
   var points = 10;
   var direction = 'left';
+  var hitImage = $('<img />', {
+              src: 'img/alienhit.gif'})
+              .addClass(settings.alienwimpy)
+              .css({'position':'absolute', 'display': 'none'})
+              .appendTo($('.gameBoard'));
 
-  Alien.call(this, points);
+  Alien.call(this, points, hitImage);
   Character.call(this, position, $alienWimpy, direction);
 }
 

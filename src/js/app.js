@@ -28,9 +28,10 @@
     
     do {
       var level = 0;
+      var score = 0;
       var hero = new Hero(0);    
       var numberofaliens = 0;
-      var alienfleet = createFleet(level);
+      var aliens = createFleet(level);
       var herobulletsarray = [];
       var herobullets = new Fleet(herobulletsarray);
       var alienbulletsarray = [];
@@ -63,10 +64,11 @@
         if (gameIsOver()) {clearInterval(stop)};
         $(".stop").click(function(){clearInterval(stop)});
         updateBoard();
-        alienbullets = alienfleet.fire(0.02, alienbullets);
+        alienbullets = aliens.fire(0.02, alienbullets);
         //run sequence of steps to keep game going:
+        checkCollisions();
         move();
-        //checkCollisions(); //heroBullets and alienBullets 
+         //heroBullets and alienBullets 
                              //Aliens and heroBullets
                              //Hero and alienBullets
         //checkAlienEndHeroLife();
@@ -92,19 +94,24 @@
           alienarray[i] = new AlienStubborn(new Position(19-i, j));
         }
       }
-      var alienfleet = new Fleet(alienarray);
-      return alienfleet;
+      var aliens = new Fleet(alienarray);
+      return aliens;
     }
 
     function move() {
-      alienfleet.move();
+      aliens.move();
       alienbullets.move();
       herobullets.move();
     }
 
+    function checkCollisions() {
+      aliens.checkCollisions(herobullets);
+      // hero.checkCollisions(alienbullets, alienfleet);
+    }
+
     function updateBoard() {
       hero.draw();
-      alienfleet.draw();
+      aliens.draw();
       herobullets.draw();
       alienbullets.draw();
     }        

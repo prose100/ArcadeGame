@@ -5,6 +5,11 @@ function Hero(lives) {
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
   var position = new Position(10, 19);
+  this.hitImage = $('<img />', {
+                src: 'img/explosion.gif'})
+                .addClass(settings.hero_class)
+                .css({'position':'absolute', 'display': 'none'})
+                .appendTo($('.gameBoard'));
 
   Character.call(this, position, $hero);
   this.lives = lives;
@@ -16,7 +21,7 @@ function Hero(lives) {
 
   Hero.prototype.isDead = function() {
     ++this.lives;
-    return this.lives == 30;
+    return this.lives == 25;
   }
 
   Hero.prototype.move = function(direction) {
@@ -32,7 +37,6 @@ function Hero(lives) {
   }
 
   Hero.prototype.fire = function() {
-      console.log(this.position);
       var bullet = new HeroBullet(new Position(Position.prototype.getPositionX.call(this.position),
                                            (Position.prototype.getPositionY.call(this.position))-1));
     return bullet;

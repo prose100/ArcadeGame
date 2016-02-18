@@ -7,11 +7,15 @@ Fleet.prototype = Object.create(Character.prototype);
 Fleet.prototype.draw = function() {
 	var i=0;
 	for (i; i<this.fleet.length; i++) {
-		console.log(this.fleet);
 		this.fleet[i].image.css(
 			{left: Position.prototype.getPositionX.call(this.fleet[i].position)*($(window).width())/20, 
 	     top: Position.prototype.getPositionY.call(this.fleet[i].position)*($(window).height())/20,
-	     'display': 'block'})
+	     'display': 'block'});
+		if(this.fleet[i].hitImage) {
+			this.fleet[i].hitImage.css(
+				{left: Position.prototype.getPositionX.call(this.fleet[i].position)*($(window).width())/20, 
+		     top: Position.prototype.getPositionY.call(this.fleet[i].position)*($(window).height())/20});
+  	}
   }
 }
 
@@ -28,7 +32,6 @@ Fleet.prototype.fire = function(frequency, bullets) {
 			bullets.push(bullet);
 		}
 	}
-	
 	return bullets;
 
 	function toFire(frequency) {
@@ -79,10 +82,30 @@ Fleet.prototype.move = function() {
 	      	if (i > -1) {
 					  this.fleet[i].image.remove();
 					  this.fleet.splice(i, 1);
-					  console.log(this.fleet);
 					};
 	      }
 		    break;
+		}
+	}
+}
+
+Fleet.prototype.checkCollisions = function(bullets) {
+
+	if (bullets.fleet.length>0){
+		for (var j=0; j<bullets.fleet.length; j++) {
+			console.log(j+"-j");
+			for (var i=0; i<this.fleet.length; i++) {
+				console.log(i+"-i");
+				if ((Position.prototype.getPositionX.call(this.fleet[i].position))
+				== (Position.prototype.getPositionX.call(bullets.fleet[j].position)) && 
+				(Position.prototype.getPositionY.call(this.fleet[i].position)) 
+				== (Position.prototype.getPositionY.call(bullets.fleet[j].position))) {
+					console.log('collide');
+					this.fleet[i].image.remove();
+					this.fleet[i].hitImage.css({'display': 'block'});
+					this.fleet.splice(i, 1);
+				}				
+			}
 		}
 	}
 }
