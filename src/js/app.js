@@ -58,21 +58,21 @@
   
     var stop = setInterval(function() {
         play();
-      }, 50); 
+      }, 150); 
 
     function play() {
         if (gameIsOver()) {clearInterval(stop)};
         $(".stop").click(function(){clearInterval(stop)});
         updateBoard();
         alienbullets = aliens.fire(0.0, alienbullets);
-        //run sequence of steps to keep game going:
-        checkCollisions();
+        
+        if (hero.checkCollision(alienbullets)) {
+          // clearBoard();
+        }
+
+        score += aliens.checkNumberOfCollisions(herobullets);
         move();
-         //heroBullets and alienBullets 
-                             //Aliens and heroBullets
-                             //Hero and alienBullets
-        //checkAlienEndHeroLife();
-        // if checkLevelComplete();
+        // if (checkLevelComplete();
           //level++
     }
 
@@ -82,16 +82,15 @@
 
     function createFleet(level) {
       var i = 0;
-      var j = 1;
       var alienarray = [];
       if(level==0) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienWimpy(new Position(19-i, j));
+          alienarray[i] = new AlienWimpy(new Position(19-i, 1));
         }
       }
       if(level==1) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienStubborn(new Position(19-i, j));
+          alienarray[i] = new AlienStubborn(new Position(19-i, 1));
         }
       }
       var aliens = new Fleet(alienarray);
@@ -102,12 +101,6 @@
       aliens.move();
       alienbullets.move();
       herobullets.move();
-    }
-
-    function checkCollisions() {
-      aliens.checkCollisions(herobullets);
-      hero.checkCollisions(alienbullets);
-      hero.checkCollisions(aliens);
     }
 
     function updateBoard() {

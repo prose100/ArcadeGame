@@ -89,23 +89,28 @@ Fleet.prototype.move = function() {
 	}
 }
 
-Fleet.prototype.checkCollisions = function(bullets) {
+Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
+	var points = 0;
 
-	if (bullets.fleet.length>0){
-		for (var j=0; j<bullets.fleet.length; j++) {
-			console.log(j+"-j");
+	if (herobullets.fleet.length>0){
+		for (var j=0; j<herobullets.fleet.length; j++) {
 			for (var i=0; i<this.fleet.length; i++) {
-				console.log(i+"-i");
 				if ((Position.prototype.getPositionX.call(this.fleet[i].position))
-				== (Position.prototype.getPositionX.call(bullets.fleet[j].position)) && 
+				== (Position.prototype.getPositionX.call(herobullets.fleet[j].position)) && 
 				(Position.prototype.getPositionY.call(this.fleet[i].position)) 
-				== (Position.prototype.getPositionY.call(bullets.fleet[j].position))) {
+				== (Position.prototype.getPositionY.call(herobullets.fleet[j].position))) {
 					this.fleet[i].image.remove();
 					this.fleet[i].hitImage.css({'display': 'block'});
 					this.fleet.splice(i, 1);
+					points += this.fleet[i].points;
 				}				
 			}
 		}
 	}
+	return points;
 }
-	
+
+
+Fleet.prototype.getPoints = function() {
+
+}

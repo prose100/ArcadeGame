@@ -25,7 +25,7 @@ function Hero(lives) {
 
   Hero.prototype.isDead = function() {
     ++this.lives;
-    return this.lives == 225;
+    return this.lives == 100;
   }
 
   Hero.prototype.move = function(direction) {
@@ -41,12 +41,12 @@ function Hero(lives) {
   }
 
   Hero.prototype.fire = function() {
-      var bullet = new HeroBullet(new Position(Position.prototype.getPositionX.call(this.position),
-                                           (Position.prototype.getPositionY.call(this.position))-1));
+    var bullet = new HeroBullet(new Position(Position.prototype.getPositionX.call(this.position),
+                                            (Position.prototype.getPositionY.call(this.position))-1));
     return bullet;
   }
 
-  Hero.prototype.checkCollisions = function(killer) {
+  Hero.prototype.checkCollision = function(killer) {
     if (killer.fleet.length) {
       for (var i=0; i<killer.fleet.length; i++) {
         if ((Position.prototype.getPositionX.call(this.position) ==
@@ -56,7 +56,9 @@ function Hero(lives) {
           --this.lives;
           this.image.remove();
           this.hitImage.css({'display': 'block'});
+          return true;
         }
+        return false;
       } 
     }
   }
