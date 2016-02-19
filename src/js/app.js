@@ -29,7 +29,7 @@
     do {
       var level = 0;
       var score = 0;
-      var hero = new Hero(0);    
+      var hero = new Hero(2);    
       var numberofaliens = 0;
       var aliens = createFleet(level);
       var herobulletsarray = [];
@@ -58,16 +58,21 @@
   
     var stop = setInterval(function() {
         play();
-      }, 150); 
+      }, 275); 
 
     function play() {
         if (gameIsOver()) {clearInterval(stop)};
         $(".stop").click(function(){clearInterval(stop)});
         updateBoard();
-        alienbullets = aliens.fire(0.0, alienbullets);
+        alienbullets = aliens.fire(0.1, alienbullets);
         
         if (hero.checkCollision(alienbullets)) {
-          // clearBoard();
+          updateBoard();
+          setTimeout(continueExecution, 3000);
+        }
+        
+        function continueExecution() {
+          clearBoard();
         }
 
         score += aliens.checkNumberOfCollisions(herobullets);
@@ -76,31 +81,25 @@
           //level++
     }
 
-    function gameIsOver() {
-      return hero.isDead(); 
-    }
-
     function createFleet(level) {
       var i = 0;
       var alienarray = [];
       if(level==0) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienWimpy(new Position(19-i, 1));
+          alienarray[i] = new AlienWimpy(new Position(19-i, 2));
         }
       }
       if(level==1) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienStubborn(new Position(19-i, 1));
+          alienarray[i] = new AlienStubborn(new Position(19-i, 2));
         }
       }
       var aliens = new Fleet(alienarray);
       return aliens;
     }
 
-    function move() {
-      aliens.move();
-      alienbullets.move();
-      herobullets.move();
+    function gameIsOver() {
+      return hero.isDead(); 
     }
 
     function updateBoard() {
@@ -108,7 +107,30 @@
       aliens.draw();
       herobullets.draw();
       alienbullets.draw();
-    }        
+    }    
+
+    function move() {
+      aliens.move();
+      alienbullets.move();
+      herobullets.move();
+    }     
+  
+    function clearBoard() {
+      aliens.remove();
+      alienbullets.remove();
+      herobullets.remove();
+      hero.remove();
+    }
+
+    function sleep(milliseconds) {
+      console.log('sleep');
+      var start = new Date().getTime();
+      for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds){
+          break;
+        } 
+      }
+    }
   }
 
   $.fn.arcadegame = function(options) {

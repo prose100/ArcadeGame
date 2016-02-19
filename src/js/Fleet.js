@@ -110,7 +110,9 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 	return points;
 }
 
-
-Fleet.prototype.getPoints = function() {
-
+Fleet.prototype.remove = function() {
+	for (var i=0; i<this.fleet.length; i++) {
+		this.fleet[i].image.remove();
+	}
 }
+

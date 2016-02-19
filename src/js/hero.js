@@ -23,9 +23,13 @@ function Hero(lives) {
        top: Position.prototype.getPositionY.call(this.position)*($(window).height())/20});
   }
 
+  Hero.prototype.remove = function() {
+    this.hitImage.remove();
+    this.image.remove();
+  }
+
   Hero.prototype.isDead = function() {
-    ++this.lives;
-    return this.lives == 100;
+    return this.lives == 0;
   }
 
   Hero.prototype.move = function(direction) {
@@ -53,7 +57,7 @@ function Hero(lives) {
         Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
         (Position.prototype.getPositionY.call(this.position) ==
         Position.prototype.getPositionY.call(killer.fleet[i].position))) {
-          --this.lives;
+          this.lives -= this.lives;
           this.image.remove();
           this.hitImage.css({'display': 'block'});
           return true;
