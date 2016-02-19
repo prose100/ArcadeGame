@@ -57,7 +57,7 @@ function Hero(lives) {
         Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
         (Position.prototype.getPositionY.call(this.position) ==
         Position.prototype.getPositionY.call(killer.fleet[i].position))) {
-          this.lives -= this.lives;
+          --this.lives;
           this.image.remove();
           this.hitImage.css({'display': 'block'});
           return true;

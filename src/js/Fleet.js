@@ -101,13 +101,26 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 				== (Position.prototype.getPositionY.call(herobullets.fleet[j].position))) {
 					this.fleet[i].image.remove();
 					this.fleet[i].hitImage.css({'display': 'block'});
-					this.fleet.splice(i, 1);
 					points += this.fleet[i].points;
+					alien = this.fleet[i];
+					aliens = this.fleet;
+	
+					setTimeout(continueExecution, 800);
+					function continueExecution() {
+						--i;
+          	alien.hitImage.remove();
+            aliens.splice(i, 1);
+        	}
 				}				
 			}
 		}
 	}
 	return points;
+}
+
+Fleet.prototype.dead = function() {
+	console.log(this.fleet.length);
+	return this.fleet.length == 0;
 }
 
 Fleet.prototype.remove = function() {

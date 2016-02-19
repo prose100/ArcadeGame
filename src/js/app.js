@@ -9,7 +9,10 @@
     alienbullet_class: 'herobullet',
     characterWidth: 20,
     characterHeight: 20,
-    stopClass: '.stop'
+    stop_class: 'stop',
+    score_class: 'score',
+    lives_class: 'lives',
+    level_class: 'level',
   };
 
   function ArcadeGame(element, options) {
@@ -73,25 +76,30 @@
         
         function continueExecution() {
           clearBoard();
+          clearInterval(stop);
+          //restart(); --> new Hero(lives updated), etc.
         }
-
-        score += aliens.checkNumberOfCollisions(herobullets);
         move();
-        // if (checkLevelComplete();
-          //level++
+        if (checkLevelComplete()) {
+          level++;
+          console.log(level);
+          updateBoard();
+          clearBoard();
+          clearInterval(stop);
+        }
     }
 
     function createFleet(level) {
       var i = 0;
       var alienarray = [];
       if(level==0) {
-        for (i; i<10; i++) {
-          alienarray[i] = new AlienWimpy(new Position(19-i, 2));
+        for (i; i<1; i++) {
+          alienarray[i] = new AlienWimpy(new Position(19-i, 1));
         }
       }
       if(level==1) {
         for (i; i<10; i++) {
-          alienarray[i] = new AlienStubborn(new Position(19-i, 2));
+          alienarray[i] = new AlienStubborn(new Position(19-i, 1));
         }
       }
       var aliens = new Fleet(alienarray);
@@ -107,6 +115,11 @@
       aliens.draw();
       herobullets.draw();
       alienbullets.draw();
+
+      score += aliens.checkNumberOfCollisions(herobullets);
+      $("." + settings.score_class).html(score);
+      $("." + settings.lives_class).html(hero.lives);
+      $("." + settings.level_class).html(level);
     }    
 
     function move() {
@@ -120,6 +133,10 @@
       alienbullets.remove();
       herobullets.remove();
       hero.remove();
+    }
+
+    function checkLevelComplete() {
+      return aliens.dead();
     }
 
     function sleep(milliseconds) {
