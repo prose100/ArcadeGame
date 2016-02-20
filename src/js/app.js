@@ -13,6 +13,7 @@
     score_class: 'score',
     lives_class: 'lives',
     level_class: 'level',
+    youwin_class: 'youwin'
   };
 
   function ArcadeGame(element, options) {
@@ -88,7 +89,11 @@
       move();
       if (checkLevelComplete()) {
         level++;
-        console.log(level);
+        if (level > 3) {
+          console.log('HI');
+          $("." + settings.youwin_class).html('Congrats! You Win!');
+           clearInterval(stop);
+        }
         updateBoard();
         clearBoard();
         isNewLevel = true;
