@@ -96,9 +96,10 @@
       }
       move();
       if (checkLevelComplete()) {
+        console.log(level);
         level++;
         if (level > 3) {
-          level--
+          --level;
           console.log('HI');
           $("." + settings.youwin_class).html('Congrats! You Win!');
            clearInterval(stop);
@@ -114,13 +115,18 @@
       var i = 0;
       var alienarray = [];
       if(level==1) {
-        for (i; i<2; i++) {
+        for (i; i<1; i++) {
           alienarray[i] = new AlienWimpy(new Position(19-i, 1));
         }
       }
       if(level==2) {
-        for (i; i<2; i++) {
+        for (i; i<1; i++) {
           alienarray[i] = new AlienStubborn(new Position(19-i, 1));
+        }
+      }
+       if(level==3) {
+        for (i; i<1; i++) {
+          alienarray[i] = new AlienTitan(new Position(19-i, 1));
         }
       }
       var aliens = new Fleet(alienarray);
