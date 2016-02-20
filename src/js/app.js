@@ -27,22 +27,15 @@
     })
   }
 
-  ArcadeGame.prototype.start = function() {
-    
-    do {
-      var level = 0;
-      var score = 0;
-      var hero = new Hero(2);    
-      var numberofaliens = 0;
-      var aliens = createFleet(level);
-      var herobulletsarray = [];
-      var herobullets = new Fleet(herobulletsarray);
-      var alienbulletsarray = [];
-      var alienbullets = new Fleet(alienbulletsarray);
-      var status = false;
-    }
-    while (status == true);
+  ArcadeGame.prototype.start = function() { 
 
+    var level = 1;
+    var score = 0;
+    var hero = new Hero(2); 
+    var aliens, alienbulletsarray, alienbullets, herobulletsarray, herobullets;
+    var isNewGame = true;
+    var isNewLevel = false;
+    
     var targetElement = document.body;
     targetElement.addEventListener('keydown', function (event) {
       switch (event.keyCode) {
@@ -61,44 +54,58 @@
   
     var stop = setInterval(function() {
         play();
-      }, 275); 
+      }, 300); 
 
     function play() {
-        if (gameIsOver()) {clearInterval(stop)};
-        $(".stop").click(function(){clearInterval(stop)});
+
+      if (gameIsOver()) {clearInterval(stop)};
+      $(".stop").click(function(){clearInterval(stop)});
+
+      if (isNewGame == true || isNewLevel==true) {
+        console.log('hi2');
+        aliens = createFleet(level);
+        herobulletsarray = [];
+        herobullets = new Fleet(herobulletsarray);
+        alienbulletsarray = [];
+        alienbullets = new Fleet(alienbulletsarray);
+        isNewGame = false;
+        isNewLevel = false;
+      }
+
+      updateBoard();
+      alienbullets = aliens.fire(0.15, alienbullets);
+      
+      if (hero.checkCollision(alienbullets)) {
         updateBoard();
-        alienbullets = aliens.fire(0.1, alienbullets);
-        
-        if (hero.checkCollision(alienbullets)) {
-          updateBoard();
-          setTimeout(continueExecution, 3000);
-        }
-        
-        function continueExecution() {
-          clearBoard();
-          clearInterval(stop);
-          //restart(); --> new Hero(lives updated), etc.
-        }
-        move();
-        if (checkLevelComplete()) {
-          level++;
-          console.log(level);
-          updateBoard();
-          clearBoard();
-          clearInterval(stop);
-        }
+        setTimeout(continueExecution, 3000);
+      }
+      
+      function continueExecution() {
+        clearBoard();
+        clearInterval(stop);
+        //restart(); --> new Hero(lives updated), etc.
+      }
+      move();
+      if (checkLevelComplete()) {
+        level++;
+        console.log(level);
+        updateBoard();
+        clearBoard();
+        isNewLevel = true;
+        console.log(isNewLevel);
+      }
     }
 
     function createFleet(level) {
       var i = 0;
       var alienarray = [];
-      if(level==0) {
-        for (i; i<1; i++) {
+      if(level==1) {
+        for (i; i<2; i++) {
           alienarray[i] = new AlienWimpy(new Position(19-i, 1));
         }
       }
-      if(level==1) {
-        for (i; i<10; i++) {
+      if(level==2) {
+        for (i; i<2; i++) {
           alienarray[i] = new AlienStubborn(new Position(19-i, 1));
         }
       }
@@ -132,6 +139,9 @@
       aliens.remove();
       alienbullets.remove();
       herobullets.remove();
+    }
+
+    function clearHero() {
       hero.remove();
     }
 

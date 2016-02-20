@@ -105,12 +105,11 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 					alien = this.fleet[i];
 					aliens = this.fleet;
 	
-					setTimeout(continueExecution, 800);
+					setTimeout(continueExecution, 200);
 					function continueExecution() {
-						--i;
           	alien.hitImage.remove();
-            aliens.splice(i, 1);
-        	}
+            }
+            this.fleet.splice(i, 1)
 				}				
 			}
 		}
@@ -119,7 +118,6 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 }
 
 Fleet.prototype.dead = function() {
-	console.log(this.fleet.length);
 	return this.fleet.length == 0;
 }
 
