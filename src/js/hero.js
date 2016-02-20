@@ -28,10 +28,6 @@ function Hero(lives) {
     this.image.remove();
   }
 
-  Hero.prototype.isDead = function() {
-    return this.lives == 0;
-  }
-
   Hero.prototype.move = function(direction) {
     if ((direction == 'right') && 
        (Position.prototype.getPositionX.call(this.position) < 19)) {
@@ -57,7 +53,6 @@ function Hero(lives) {
         Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
         (Position.prototype.getPositionY.call(this.position) ==
         Position.prototype.getPositionY.call(killer.fleet[i].position))) {
-          --this.lives;
           this.image.remove();
           this.hitImage.css({'display': 'block'});
           return true;

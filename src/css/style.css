@@ -69,7 +69,8 @@
   float: left;
   margin-right: -10px;
 }
-.main .youwin {
+.main .youwin,
+.main .gameover {
   font-size: 24px;
   text-align: center;
   width: 300px;

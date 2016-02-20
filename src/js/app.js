@@ -13,7 +13,8 @@
     score_class: 'score',
     lives_class: 'lives',
     level_class: 'level',
-    youwin_class: 'youwin'
+    youwin_class: 'youwin',
+    gameover_class: 'gameover'
   };
 
   function ArcadeGame(element, options) {
@@ -32,10 +33,12 @@
 
     var level = 1;
     var score = 0;
-    var hero = new Hero(2); 
+    var lives = 2;
+    var hero = new Hero(lives); 
     var aliens, alienbulletsarray, alienbullets, herobulletsarray, herobullets;
     var isNewGame = true;
     var isNewLevel = false;
+    var isNextLife = false;
     
     var targetElement = document.body;
     targetElement.addEventListener('keydown', function (event) {
@@ -59,11 +62,14 @@
 
     function play() {
 
-      if (gameIsOver()) {clearInterval(stop)};
+      if (lives == 0) {
+          clearInterval(stop)
+          $("." + settings.gameover_class).html('Sorry. Game Over!');
+      };
+
       $(".stop").click(function(){clearInterval(stop)});
 
-      if (isNewGame == true || isNewLevel==true) {
-        console.log('hi2');
+      if (isNewGame == true || isNewLevel==true || isNextLife==true) {
         aliens = createFleet(level);
         herobulletsarray = [];
         herobullets = new Fleet(herobulletsarray);
@@ -71,6 +77,7 @@
         alienbullets = new Fleet(alienbulletsarray);
         isNewGame = false;
         isNewLevel = false;
+        isNextLife = false;
       }
 
       updateBoard();
@@ -83,13 +90,15 @@
       
       function continueExecution() {
         clearBoard();
-        clearInterval(stop);
-        //restart(); --> new Hero(lives updated), etc.
+        hero.remove(); 
+        hero = new Hero(--lives);
+        isNextLife = true;
       }
       move();
       if (checkLevelComplete()) {
         level++;
         if (level > 3) {
+          level--
           console.log('HI');
           $("." + settings.youwin_class).html('Congrats! You Win!');
            clearInterval(stop);
