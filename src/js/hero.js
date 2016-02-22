@@ -12,7 +12,6 @@ function Hero(lives) {
                 .appendTo($('.gameBoard'));
 
   Character.call(this, position, $hero);
-  this.lives = lives;
   }
 
   Hero.prototype.draw = function() {

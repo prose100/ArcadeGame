@@ -39,9 +39,6 @@
 <body>
     <div class="gameBoard"> 
       <div class="heading">
-        <button class="start">Play</button>
-        <button class="pause">Pause</button>
-        <button class="stop">Stop</button>
         <div class="scoreboard">
           <div class="section">
           <div class="label">Score:</div>
@@ -58,8 +55,6 @@
         </div>
       </div>
       <div class="main">
-        <div class="youwin"></div>
-        <div class="gameover"></div>
       </div>
     </div>
   
@@ -73,6 +68,7 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 
     <script src="js/app.js"></script>
+    <script src="js/UI.js"></script>
     <script src="js/Position.js"></script>
     <script src="js/Hero.js"></script>
     <script src="js/AlienBullet.js"></script>
@@ -87,7 +83,7 @@
 
     <script>
     $(function() {
-        $(".start").arcadegame({
+        $(".gameBoard").arcadegame({
           hero_class: 'hero',
           alienwimpy_class: 'alienwimpy',
           alienstubbron_class: 'alienstubborn',

@@ -74,6 +74,16 @@
   width: 300px;
   margin: 0 auto;
 }
+.main .startnewgame {
+  position: absolute;
+  left: 43.7%;
+  font-size: 24px;
+}
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: "table";
+}
 /*------------------------------------------
   Responsive Grid Media Queries - 1280, 1024, 768, 480
    1280-1024   - desktop (default grid)

@@ -14,31 +14,35 @@
     lives_class: 'lives',
     level_class: 'level',
     youwin_class: 'youwin',
-    gameover_class: 'gameover'
+    gameover_class: 'gameover',
+    play_class: 'play',
+    pause_class: 'pause',
+    quit_class: 'quit',
+    startnewgame_class: 'startnewgame'
   };
 
   function ArcadeGame(element, options) {
   
     settings = $.extend({}, defaults, options);
 
-    var $this = $(element); //stargruntt button
+    var $this = $(element); //play button
     var that = this; //arcadegame
 
-    $this.click(function(){
-      that.start();
-    })
+    that.start();
   }
 
   ArcadeGame.prototype.start = function() { 
-
+   
     var level = 1;
     var score = 0;
-    var lives = 2;
-    var hero = new Hero(lives); 
+    var lives = 1;
+    var hero = new Hero(lives);
+    var uicontent = new UI(); 
     var aliens, alienbulletsarray, alienbullets, herobulletsarray, herobullets;
     var isNewGame = true;
     var isNewLevel = false;
     var isNextLife = false;
+    var quit = false;
     
     var targetElement = document.body;
     targetElement.addEventListener('keydown', function (event) {
@@ -56,18 +60,46 @@
       };
     });
   
-    var stop = setInterval(function() {
-        play();
-      }, 300); 
+    var stop;
+    function runInterval(run) {  
+        if (run == true) {
+            stop = setInterval(function() {
+            play();
+          }, 300); 
+        };
+
+        if (run == false) {
+          clearInterval(stop);
+        };
+        quit=false;
+    }     
+
+    (uicontent.getPlay()).click(function() {
+      runInterval(true);
+      uicontent.pressPlay();
+    });
+    (uicontent.getStartNewGame()).click(function() {
+      runInterval(true);
+      uicontent.pressPlay();
+    });
+    (uicontent.getPause()).click(function() {
+      runInterval(false);
+      uicontent.pressPause();
+    });
+    (uicontent.getQuit()).click(function() {
+      quit=true;
+    });
 
     function play() {
 
-      if (lives == 0) {
-          clearInterval(stop)
-          $("." + settings.gameover_class).html('Sorry. Game Over!');
+      if (lives == 0 || quit == true) {
+        clearBoard();
+        isNewGame=true;
+        lives = 1;  
+        runInterval(false);
+        uicontent.displayGameOver();
+        uicontent.displayStartNewGame();
       };
-
-      $(".stop").click(function(){clearInterval(stop)});
 
       if (isNewGame == true || isNewLevel==true || isNextLife==true) {
         aliens = createFleet(level);
@@ -99,15 +131,16 @@
         console.log(level);
         level++;
         if (level > 3) {
-          --level;
-          console.log('HI');
-          $("." + settings.youwin_class).html('Congrats! You Win!');
-           clearInterval(stop);
+          level = 1;
+          uicontent.getYouWin().html("Congrats! You Win! Your is score is " + score + ".");
+          uicontent.displayYouWin();
+          uicontent.displayStartNewGame();
+          score = 0;
+          runInterval(false);
         }
         updateBoard();
         clearBoard();
         isNewLevel = true;
-        console.log(isNewLevel);
       }
     }
 
@@ -115,26 +148,22 @@
       var i = 0;
       var alienarray = [];
       if(level==1) {
-        for (i; i<1; i++) {
+        for (i; i<10; i++) {
           alienarray[i] = new AlienWimpy(new Position(19-i, 1));
         }
       }
       if(level==2) {
-        for (i; i<1; i++) {
+        for (i; i<10; i++) {
           alienarray[i] = new AlienStubborn(new Position(19-i, 1));
         }
       }
        if(level==3) {
-        for (i; i<1; i++) {
+        for (i; i<10; i++) {
           alienarray[i] = new AlienTitan(new Position(19-i, 1));
         }
       }
       var aliens = new Fleet(alienarray);
       return aliens;
-    }
-
-    function gameIsOver() {
-      return hero.isDead(); 
     }
 
     function updateBoard() {
@@ -145,7 +174,7 @@
 
       score += aliens.checkNumberOfCollisions(herobullets);
       $("." + settings.score_class).html(score);
-      $("." + settings.lives_class).html(hero.lives);
+      $("." + settings.lives_class).html(lives);
       $("." + settings.level_class).html(level);
     }    
 
@@ -170,7 +199,6 @@
     }
 
     function sleep(milliseconds) {
-      console.log('sleep');
       var start = new Date().getTime();
       for (var i = 0; i < 1e7; i++) {
         if ((new Date().getTime() - start) > milliseconds){
