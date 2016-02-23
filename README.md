@@ -16,4 +16,4 @@ This code serves as an example of Objected-oriented JS.
 
 ## Getting more details
 
-Visit [paultrose.com](http://www.paultrose.com/blogFeb15.html) for more details about this program.
+Visit [paultrose.com](http://www.paultrose.com/blogFeb16.html) for more details about this program.
