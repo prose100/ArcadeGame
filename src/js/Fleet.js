@@ -112,7 +112,7 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 					alien = this.fleet[i];
 					aliens = this.fleet;
 	
-					setTimeout(continueExecution, 200);
+					setTimeout(continueExecution, 115);
 					function continueExecution() {
           	alien.hitImage.remove();
             }
@@ -134,5 +134,9 @@ Fleet.prototype.remove = function() {
 	for (var i=0; i<this.fleet.length; i++) {
 		this.fleet[i].image.remove();
 	}
+}
+
+Fleet.prototype.sizeOf = function() {
+	return this.fleet.length;
 }
 

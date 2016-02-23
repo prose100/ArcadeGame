@@ -52,8 +52,11 @@
       switch (event.keyCode) {
         //up arrow
         case 38:
-          var bullet = hero.fire();
-          herobullets.push(bullet);
+          var bullet;
+          if (herobullets.sizeOf() < 10) {
+            var bullet = hero.fire();
+            herobullets.push(bullet);
+          }
           break;
           //left arrow
         case 37:
@@ -126,10 +129,10 @@
       //update characters on the gameboard
       updateBoard();
       //fire alien bullets at provided frequency input
-      alienbullets = aliens.fire(0.15, alienbullets);
+      alienbullets = aliens.fire(0.10, alienbullets);
       
-      //checks for collisions between the hero and the alienbullets
-      if (hero.checkCollision(alienbullets)) {
+      //checks for collisions between the hero and the alienbullets/aliens
+      if ((hero.checkCollision(alienbullets)) || (hero.checkCollision(aliens))) {
         updateBoard();
         setTimeout(continueExecution, 250);
       }
