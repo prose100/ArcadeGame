@@ -1,9 +1,12 @@
+//Fleet.js creates an array of characters, namely aliens and bullets (both hero and alien)
 function Fleet(fleet) {
 	this.fleet = fleet;
 }
 
+//Character is descendent of Fleet 
 Fleet.prototype = Object.create(Character.prototype);
 
+//draws fleet on the gameboard
 Fleet.prototype.draw = function() {
 	var i=0;
 	for (i; i<this.fleet.length; i++) {
@@ -19,10 +22,12 @@ Fleet.prototype.draw = function() {
   }
 }
 
+//pushes element on to the fleet array
 Fleet.prototype.push = function(element) {
 	this.fleet.push(element);
 }
 
+//element in fleet fires bullet
 Fleet.prototype.fire = function(frequency, bullets) {
 	var i = 0;
 
@@ -39,6 +44,7 @@ Fleet.prototype.fire = function(frequency, bullets) {
 	}
 }
 
+//moves each of the elemnts in a fleet
 Fleet.prototype.move = function() {
 	var i=0;
 	for (i; i<this.fleet.length; i++) {
@@ -89,6 +95,7 @@ Fleet.prototype.move = function() {
 	}
 }
 
+//checks collisions between each of the aliens and each of the herobullets
 Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 	var points = 0;
 
@@ -117,10 +124,12 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 	return points;
 }
 
+//checks if fleet is gone
 Fleet.prototype.dead = function() {
 	return this.fleet.length == 0;
 }
 
+//removes each item of a fleet
 Fleet.prototype.remove = function() {
 	for (var i=0; i<this.fleet.length; i++) {
 		this.fleet[i].image.remove();

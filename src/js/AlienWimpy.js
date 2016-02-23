@@ -1,3 +1,4 @@
+//AlienWimpy.js creates an alienwimpy
 function AlienWimpy(position) {
 	var $alienWimpy = $('<img />', {
               src: 'img/wimpy.gif'})
@@ -16,10 +17,12 @@ function AlienWimpy(position) {
   Character.call(this, position, $alienWimpy, direction);
 }
 
+//draws an alienwimpy on the gameboard
 AlienWimpy.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
 
+//fires an alienbullet
 AlienWimpy.prototype.fire = function() {
   var bullet = new AlienBullet(new Position(Position.prototype.getPositionX.call(this.position),
                                            Position.prototype.getPositionY.call(this.position)+1));

@@ -1,3 +1,4 @@
+//AlienBullet.js creates an alienbullet
 function HeroBullet(position) {
 	var $herobullet = $('<img />', {
               src: 'img/hero_blt.gif'})
@@ -9,6 +10,7 @@ function HeroBullet(position) {
 	Character.call(this, position, $herobullet, direction);
 }
 
+//draw herobullet on gameboard
 HeroBullet.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }

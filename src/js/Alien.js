@@ -1,8 +1,10 @@
+//Alien.js creates a generic alien
 function Alien(points, hitImage) {
   this.points = points;
   this.hitImage = hitImage;
 }
 
+//AlienWimpy, AlienStubborn, and AlienTitan are descendents of Alien
 Alien.prototype = Object.create(AlienWimpy.prototype);
 Alien.prototype = Object.create(AlienStubborn.prototype);
 Alien.prototype = Object.create(AlienTitan.prototype);

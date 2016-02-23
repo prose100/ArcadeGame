@@ -1,3 +1,4 @@
+//AlienTitan.js creates an alientitan
 function AlienTitan(position) {
 	var $alientitan = $('<img />', {
               src: 'img/titan.gif'})
@@ -16,10 +17,12 @@ function AlienTitan(position) {
   Character.call(this, position, $alientitan, direction);
 }
 
+//draws alientitan
 AlienTitan.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
 
+//fires bullet
 AlienTitan.prototype.fire = function() {
   var bullet = new AlienBullet(new Position(Position.prototype.getPositionX.call(this.position),
                                            Position.prototype.getPositionY.call(this.position)+1));
