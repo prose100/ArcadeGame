@@ -1,6 +1,6 @@
 # Arcade Game
 
-This code serves as an example of Objected-oriented JS.
+This code serves as an example of object-oriented JS.
 
 ## Getting Started
 
