@@ -134,6 +134,7 @@
       //checks for collisions between the hero and the alienbullets/aliens
       if ((hero.checkCollision(alienbullets)) || (hero.checkCollision(aliens))) {
         updateBoard();
+        //delay so that the hero's hitImage remains on the board for 250ms
         setTimeout(continueExecution, 250);
       }
       

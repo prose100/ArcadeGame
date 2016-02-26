@@ -113,10 +113,11 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 					aliens = this.fleet;
 	
 					setTimeout(continueExecution, 115);
+        			//delay so that the alien's hitImage remains on the board for 115ms
 					function continueExecution() {
-          	alien.hitImage.remove();
-            }
-            this.fleet.splice(i, 1)
+			          	alien.hitImage.remove();
+			        }
+			        this.fleet.splice(i, 1)
 				}				
 			}
 		}
