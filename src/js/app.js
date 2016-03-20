@@ -108,7 +108,8 @@
         clearBoard();
         isNewGame=true;
         level=1;
-        lives = 3;  
+        lives = 3;
+        score = 0;
         runInterval(false);
         uicontent.displayGameOver();
         uicontent.displayStartNewGame();
