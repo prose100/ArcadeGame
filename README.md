@@ -1,4 +1,6 @@
-# Arcade Game
+# Space Invaders, Arcade Game
+
+![Space Invaders](https://github.com/prose100/ArcadeGame/blob/master/src/img/ArcadeGame.jpg) 
 
 This code serves as an example of object-oriented JS.
 
