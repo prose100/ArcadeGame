@@ -64,18 +64,18 @@ UI.prototype.getYouWin = function() {
 UI.prototype.pressPlay = function() {
 	(UI.prototype.getQuit.call(this)).css({'display':'inline-block'});
 	(UI.prototype.getQuit.call(this)).css({'display':'inline-block'});
-    (UI.prototype.getPlay.call(this)).css({'display': 'none'});
-    (UI.prototype.getPause.call(this)).css({'display': 'inline-block'});
-    (UI.prototype.getStartNewGame.call(this)).css({'display': 'none'});
-    (UI.prototype.getGameOver.call(this)).css({'display': 'none'});
-    (UI.prototype.getYouWin.call(this)).css({'display': 'none'});
+  (UI.prototype.getPlay.call(this)).css({'display': 'none'});
+  (UI.prototype.getPause.call(this)).css({'display': 'inline-block'});
+  (UI.prototype.getStartNewGame.call(this)).css({'display': 'none'});
+  (UI.prototype.getGameOver.call(this)).css({'display': 'none'});
+  (UI.prototype.getYouWin.call(this)).css({'display': 'none'});
 }
 
 //if user presses pause
 UI.prototype.pressPause = function() {
 	(UI.prototype.getQuit.call(this)).css({'display':'none'});
-    (UI.prototype.getPlay.call(this)).css({'display': 'inline-block'});
-    (UI.prototype.getPause.call(this)).css({'display': 'none'});
+  (UI.prototype.getPlay.call(this)).css({'display': 'inline-block'});
+  (UI.prototype.getPause.call(this)).css({'display': 'none'});
 }
 
 //makes game over message visible to user

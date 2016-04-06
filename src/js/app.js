@@ -40,7 +40,7 @@
     var lives = 3;
     var hero = new Hero(lives);
     var uicontent = new UI(); 
-    var aliens, alienbulletsarray, alienbullets, herobulletsarray, herobullets;
+    var aliens, alienbullets, herobullets;
     var isNewGame = true;
     var isNewLevel = false;
     var isNextLife = false;
@@ -104,24 +104,24 @@
     //play() starts and stops depending on input to runInterval()
     function play() {
       //methods that take place if hero dies or user quits
-      if (lives == 0 || quit == true) {
+      if (hero.getLives() == 0 || quit == true) {
         clearBoard();
-        isNewGame=true;
-        level=1;
-        lives = 3;
+        clearHero();
+        isNewGame = true;
+        level = 1;
+        hero = new Hero(3);
         score = 0;
+        hero.draw();
         runInterval(false);
         uicontent.displayGameOver();
         uicontent.displayStartNewGame();
-      };
+      }
 
-      //new characters are created if game, level, of life is new
-      if (isNewGame == true || isNewLevel==true || isNextLife==true) {
+      //new characters are created if game, level, or life is new
+      if (isNewGame == true || isNewLevel == true || isNextLife == true) {
         aliens = createFleet(level);
-        herobulletsarray = [];
-        herobullets = new Fleet(herobulletsarray);
-        alienbulletsarray = [];
-        alienbullets = new Fleet(alienbulletsarray);
+        herobullets = new Fleet([]);
+        alienbullets = new Fleet([]);
         isNewGame = false;
         isNewLevel = false;
         isNextLife = false;
@@ -142,8 +142,11 @@
       //continueExecution() when the hero comes in contact with an alien bullet
       function continueExecution() {
         clearBoard();
-        hero.remove(); 
-        hero = new Hero(--lives);
+        hero.positionAtHome();
+        hero.setLives(hero.getLives()-1);
+        console.log(hero);
+        hero.draw();
+        console.log(hero);
         isNextLife = true;
       }
 
@@ -201,7 +204,7 @@
       //update scoreboard
       score += aliens.checkNumberOfCollisions(herobullets);
       $("." + settings.score_class).html(score);
-      $("." + settings.lives_class).html(lives);
+      $("." + settings.lives_class).html(hero.getLives());
       $("." + settings.level_class).html(level);
     }    
 
@@ -219,7 +222,6 @@
       herobullets.remove();
     }
 
-    //remove hero
     function clearHero() {
       hero.remove();
     }

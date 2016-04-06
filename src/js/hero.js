@@ -1,18 +1,34 @@
 //Hero.js creates hero character
 function Hero(lives) {
-  var $hero = $('<img />', {
+  this.lives = lives;
+  this.normalImage = $('<img />', {
               src: 'img/hero.gif'})
               .addClass(settings.hero_class)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-  var position = new Position(10, 19);
+  this.position = new Position(10, 19);
   this.hitImage = $('<img />', {
                 src: 'img/explosion.gif'})
                 .addClass(settings.hero_class)
                 .css({'position':'absolute', 'display': 'none'})
                 .appendTo($('.gameBoard'));
 
-  Character.call(this, position, $hero);
+  Character.call(this, this.position, this.normalImage);
+  }
+
+  //getter and setter of lives
+  Hero.prototype.getLives = function() {
+    return this.lives;
+  }
+
+  Hero.prototype.setLives = function(lives) {
+    this.lives = lives;
+  }
+
+  Hero.prototype.positionAtHome = function() {
+    Position.prototype.setPositionX.call(this.position, 10);
+    Position.prototype.setPositionY.call(this.position, 19); 
+    Hero.prototype.flipImages.call(this, "newLife");
   }
 
   //draws hero on the gameboard
@@ -28,6 +44,18 @@ function Hero(lives) {
   Hero.prototype.remove = function() {
     this.hitImage.remove();
     this.image.remove();
+  }
+
+  //toggle hit and normal images
+  Hero.prototype.flipImages = function(status) {
+      if (status == "destroy") {
+        this.normalImage.css({'display': 'none'});
+        this.hitImage.css({'display': 'block'});
+      } 
+      if (status == "newLife") {
+        this.hitImage.css({'display': 'none'});
+        this.normalImage.css({'display': 'block'});
+      }
   }
 
   //moves hero on gameboard
@@ -58,8 +86,7 @@ function Hero(lives) {
         Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
         (Position.prototype.getPositionY.call(this.position) ==
         Position.prototype.getPositionY.call(killer.fleet[i].position))) {
-          this.image.remove();
-          this.hitImage.css({'display': 'block'});
+          Hero.prototype.flipImages.call(this, "destroy");
           return true;
         }
         return false;

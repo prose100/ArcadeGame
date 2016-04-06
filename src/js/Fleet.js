@@ -3,9 +3,6 @@ function Fleet(fleet) {
 	this.fleet = fleet;
 }
 
-//Character is descendent of Fleet 
-Fleet.prototype = Object.create(Character.prototype);
-
 //draws fleet on the gameboard
 Fleet.prototype.draw = function() {
 	var i=0;
