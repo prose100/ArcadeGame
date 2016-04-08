@@ -1,22 +1,25 @@
 //Hero.js creates hero character
 function Hero(lives) {
   this.lives = lives;
-  this.normalImage = $('<img />', {
+  var normalImage = $('<img />', {
               src: 'img/hero.gif'})
               .addClass(settings.hero_class)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-  this.position = new Position(10, 19);
-  this.hitImage = $('<img />', {
+  var position = new Position(10, 19);
+  var hitImage = $('<img />', {
                 src: 'img/explosion.gif'})
                 .addClass(settings.hero_class)
                 .css({'position':'absolute', 'display': 'none'})
                 .appendTo($('.gameBoard'));
+  
+  this.normalImage = function() { return normalImage } 
+  this.hitImage = function() { return hitImage }
 
-  Character.call(this, this.position, this.normalImage);
+  Character.call(this, position, normalImage);
   }
 
-  //getter and setter of lives
+  //getter and setter of lives-
   Hero.prototype.getLives = function() {
     return this.lives;
   }
@@ -25,37 +28,29 @@ function Hero(lives) {
     this.lives = lives;
   }
 
+  Hero.prototype.setImage = function(type) {
+    Character.prototype.clearImage.call(this);
+    if (type == 'normal') {
+      this.image = this.normalImage();
+    }
+    if (type == 'hit') {
+      this.image = this.hitImage();
+    }
+  }
+
   Hero.prototype.positionAtHome = function() {
     Position.prototype.setPositionX.call(this.position, 10);
-    Position.prototype.setPositionY.call(this.position, 19); 
-    Hero.prototype.flipImages.call(this, "newLife");
+    Position.prototype.setPositionY.call(Character.prototype.getPosition.call(this), 19);
   }
 
   //draws hero on the gameboard
   Hero.prototype.draw = function() {
     Character.prototype.draw.call(this);
-
-    this.hitImage.css(
-      {left: Position.prototype.getPositionX.call(this.position)*($(window).width())/20, 
-       top: Position.prototype.getPositionY.call(this.position)*($(window).height())/20});
   }
 
   //removes hero from gameboard
   Hero.prototype.remove = function() {
-    this.hitImage.remove();
     this.image.remove();
-  }
-
-  //toggle hit and normal images
-  Hero.prototype.flipImages = function(status) {
-      if (status == "destroy") {
-        this.normalImage.css({'display': 'none'});
-        this.hitImage.css({'display': 'block'});
-      } 
-      if (status == "newLife") {
-        this.hitImage.css({'display': 'none'});
-        this.normalImage.css({'display': 'block'});
-      }
   }
 
   //moves hero on gameboard
@@ -86,7 +81,6 @@ function Hero(lives) {
         Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
         (Position.prototype.getPositionY.call(this.position) ==
         Position.prototype.getPositionY.call(killer.fleet[i].position))) {
-          Hero.prototype.flipImages.call(this, "destroy");
           return true;
         }
         return false;

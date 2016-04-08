@@ -1,4 +1,4 @@
-//Fleet.js creates an array of characters, namely aliens and bullets (both hero and alien)
+//Fleet.js creates an array of characters, namely aliens and hero/alien bullets
 function Fleet(fleet) {
 	this.fleet = fleet;
 }
