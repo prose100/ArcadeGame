@@ -106,6 +106,7 @@
       //methods that take place if hero dies or user quits
       if (hero.getLives() == 0 || quit == true) {
         clearBoard();
+        clearHero();
         isNewGame = true;
         level = 1;
         hero = new Hero(3);
@@ -136,7 +137,7 @@
         hero.setImage('hit');
         updateBoard();
         //delay so that the hero's hitImage remains on the board for 250ms
-        setTimeout(continueExecution, 300);
+        setTimeout(continueExecution, 240);
       }
       
       //continueExecution() when the hero comes in contact with an alien bullet
@@ -145,6 +146,7 @@
         hero.positionAtHome();
         hero.setImage('normal');
         hero.setLives(hero.getLives()-1);
+        console.log(hero.getLives());
         hero.draw();
         isNextLife = true;
       }
@@ -222,7 +224,7 @@
     }
 
     function clearHero() {
-      
+      hero.remove();      
     }
 
     function checkLevelComplete() {

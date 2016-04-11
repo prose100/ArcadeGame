@@ -50,6 +50,11 @@ function Hero(lives) {
 
   //removes hero from gameboard
   Hero.prototype.remove = function() {
+    this.image = this.normalImage();
+    console.log(this.image);
+    this.image.remove();
+    this.image = this.hitImage();
+    console.log(this.image);
     this.image.remove();
   }
 
@@ -57,12 +62,12 @@ function Hero(lives) {
   Hero.prototype.move = function(direction) {
     if ((direction == 'right') && 
        (Position.prototype.getPositionX.call(this.position) < 19)) {
-          Position.prototype.setPositionX.call(this.position, 
-          (Position.prototype.getPositionX.call(this.position)) + 1);
+        Position.prototype.setPositionX.call(this.position, 
+       (Position.prototype.getPositionX.call(this.position)) + 1);
     } else if ((direction == 'left') &&
       (Position.prototype.getPositionX.call(this.position) > 1)) {
-        Position.prototype.setPositionX.call(this.position, 
-        (Position.prototype.getPositionX.call(this.position)) - 1);
+       Position.prototype.setPositionX.call(this.position, 
+      (Position.prototype.getPositionX.call(this.position)) - 1);
     }
   }
 
@@ -77,13 +82,10 @@ function Hero(lives) {
   Hero.prototype.checkCollision = function(killer) {
     if (killer.fleet.length) {
       for (var i=0; i<killer.fleet.length; i++) {
-        if ((Position.prototype.getPositionX.call(this.position) ==
-        Position.prototype.getPositionX.call(killer.fleet[i].position)) &&
-        (Position.prototype.getPositionY.call(this.position) ==
-        Position.prototype.getPositionY.call(killer.fleet[i].position))) {
+        if ((Position.prototype.isEqualPosition.call(this, this.position, killer.fleet[i].position))) {
           return true;
-        }
-        return false;
-      } 
+          }
+      }
+    return false;
     }
-  }
+  } 

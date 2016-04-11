@@ -131,6 +131,10 @@ Fleet.prototype.dead = function() {
 Fleet.prototype.remove = function() {
 	for (var i=0; i<this.fleet.length; i++) {
 		this.fleet[i].image.remove();
+
+		if (this.fleet[i].hitImage) {
+			this.fleet[i].hitImage.remove();
+		}
 	}
 }
 
