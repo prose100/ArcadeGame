@@ -16,10 +16,12 @@ function AlienStubborn(position) {
   Character.call(this, position, $alienstubborn, direction);
 }
 
+//draws alienstubborn
 AlienStubborn.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
 
+//alienstubborn fires bullet
 AlienStubborn.prototype.fire = function() {
   return Alien.prototype.fire.call(this);
 }

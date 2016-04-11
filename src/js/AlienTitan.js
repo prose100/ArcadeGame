@@ -22,6 +22,7 @@ AlienTitan.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
 
+//alientitan fires bullet
 AlienTitan.prototype.fire = function() {
   return Alien.prototype.fire.call(this);
 }

@@ -7,16 +7,8 @@ function Fleet(fleet) {
 Fleet.prototype.draw = function() {
 	var i=0;
 	for (i; i<this.fleet.length; i++) {
-		this.fleet[i].image.css(
-			{left: Position.prototype.getPositionX.call(this.fleet[i].position)*($(window).width())/20, 
-	     top: Position.prototype.getPositionY.call(this.fleet[i].position)*($(window).height())/20,
-	     'display': 'block'});
-		if(this.fleet[i].hitImage) {
-			this.fleet[i].hitImage.css(
-				{left: Position.prototype.getPositionX.call(this.fleet[i].position)*($(window).width())/20, 
-		     top: Position.prototype.getPositionY.call(this.fleet[i].position)*($(window).height())/20});
+		this.fleet[i].draw();
   	}
-  }
 }
 
 //pushes element on to the fleet array
@@ -99,20 +91,17 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 	if (herobullets.fleet.length>0){
 		for (var j=0; j<herobullets.fleet.length; j++) {
 			for (var i=0; i<this.fleet.length; i++) {
-				if ((Position.prototype.getPositionX.call(this.fleet[i].position))
-				== (Position.prototype.getPositionX.call(herobullets.fleet[j].position)) && 
-				(Position.prototype.getPositionY.call(this.fleet[i].position)) 
-				== (Position.prototype.getPositionY.call(herobullets.fleet[j].position))) {
+				if (Position.prototype.isSamePosition(this.fleet[i].position, herobullets.fleet[j].position)) {
 					this.fleet[i].image.remove();
-					this.fleet[i].hitImage.css({'display': 'block'});
+					this.fleet[i].setImage('hit');
+					this.fleet[i].draw();
 					points += this.fleet[i].points;
 					alien = this.fleet[i];
-					aliens = this.fleet;
 	
 					setTimeout(continueExecution, 115);
         			//delay so that the alien's hitImage remains on the board for 115ms
 					function continueExecution() {
-			          	alien.hitImage.remove();
+			          	alien.image.remove();
 			        }
 			        this.fleet.splice(i, 1)
 				}				
@@ -132,8 +121,9 @@ Fleet.prototype.remove = function() {
 	for (var i=0; i<this.fleet.length; i++) {
 		this.fleet[i].image.remove();
 
-		if (this.fleet[i].hitImage) {
-			this.fleet[i].hitImage.remove();
+		if (Alien == this.fleet[i]) {
+			this.fleet[i].setImage('hit');
+			this.fleet[i].image.remove();
 		}
 	}
 }
@@ -141,4 +131,3 @@ Fleet.prototype.remove = function() {
 Fleet.prototype.sizeOf = function() {
 	return this.fleet.length;
 }
-

@@ -21,9 +21,9 @@ Position.prototype.getPositionY = function() {
   return this.y;
 }
 
-Position.prototype.isSamePosition = function(item1, item2) {
-	return ((Position.prototype.getPositionX.call(item1) ==
-        	 Position.prototype.getPositionX.call(item2)) &&
-        	(Position.prototype.getPositionY.call(item1) ==
-        	 Position.prototype.getPositionY.call(item2)))
+Position.prototype.isSamePosition = function(pos1, pos2) {
+	return ((Position.prototype.getPositionX.call(pos1) ==
+        	 Position.prototype.getPositionX.call(pos2)) &&
+        	(Position.prototype.getPositionY.call(pos1) ==
+        	 Position.prototype.getPositionY.call(pos2)))
 }

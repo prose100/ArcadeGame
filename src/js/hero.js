@@ -60,12 +60,10 @@ function Hero(lives) {
 
   //moves hero on gameboard
   Hero.prototype.move = function(direction) {
-    if ((direction == 'right') && 
-       (Position.prototype.getPositionX.call(this.position) < 19)) {
+    if ((direction == 'right') && (Position.prototype.getPositionX.call(this.position) < 19)) {
         Position.prototype.setPositionX.call(this.position, 
        (Position.prototype.getPositionX.call(this.position)) + 1);
-    } else if ((direction == 'left') &&
-      (Position.prototype.getPositionX.call(this.position) > 1)) {
+    } else if ((direction == 'left') && (Position.prototype.getPositionX.call(this.position) > 1)) {
        Position.prototype.setPositionX.call(this.position, 
       (Position.prototype.getPositionX.call(this.position)) - 1);
     }
@@ -78,13 +76,13 @@ function Hero(lives) {
     return bullet;
   }
 
-  //checks for collisions between alienbullets/aliens and hero.
+  //checks for collisions between hero and alienbullets/aliens
   Hero.prototype.checkCollision = function(killer) {
     if (killer.fleet.length) {
       for (var i=0; i<killer.fleet.length; i++) {
-        if ((Position.prototype.isSamePosition.call(this, this.position, killer.fleet[i].position))) {
+        if ((Position.prototype.isSamePosition(this.position, killer.fleet[i].position))) {
           return true;
-          }
+        }
       }
     return false;
     }
