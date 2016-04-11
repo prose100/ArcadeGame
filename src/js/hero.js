@@ -1,25 +1,25 @@
 //Hero.js creates hero character
 function Hero(lives) {
   this.lives = lives;
-  var normalImage = $('<img />', {
+  var position = new Position(10, 19);
+  var $normalImage = $('<img />', {
               src: 'img/hero.gif'})
               .addClass(settings.hero_class)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
-  var position = new Position(10, 19);
-  var hitImage = $('<img />', {
+  var $hitImage = $('<img />', {
                 src: 'img/explosion.gif'})
                 .addClass(settings.hero_class)
                 .css({'position':'absolute', 'display': 'none'})
                 .appendTo($('.gameBoard'));
   
-  this.normalImage = function() { return normalImage } 
-  this.hitImage = function() { return hitImage }
+  this.normalImage = function() { return $normalImage } 
+  this.hitImage = function() { return $hitImage }
 
-  Character.call(this, position, normalImage);
+  Character.call(this, position, $normalImage);
   }
 
-  //getter and setter of lives-
+  //getter and setter of lives
   Hero.prototype.getLives = function() {
     return this.lives;
   }
@@ -40,7 +40,7 @@ function Hero(lives) {
 
   Hero.prototype.positionAtHome = function() {
     Position.prototype.setPositionX.call(this.position, 10);
-    Position.prototype.setPositionY.call(Character.prototype.getPosition.call(this), 19);
+    Position.prototype.setPositionY.call(this.position, 19);
   }
 
   //draws hero on the gameboard
@@ -50,11 +50,11 @@ function Hero(lives) {
 
   //removes hero from gameboard
   Hero.prototype.remove = function() {
+    //remove normalImage
     this.image = this.normalImage();
-    console.log(this.image);
     this.image.remove();
+    //remove hitImage
     this.image = this.hitImage();
-    console.log(this.image);
     this.image.remove();
   }
 
@@ -82,7 +82,7 @@ function Hero(lives) {
   Hero.prototype.checkCollision = function(killer) {
     if (killer.fleet.length) {
       for (var i=0; i<killer.fleet.length; i++) {
-        if ((Position.prototype.isEqualPosition.call(this, this.position, killer.fleet[i].position))) {
+        if ((Position.prototype.isSamePosition.call(this, this.position, killer.fleet[i].position))) {
           return true;
           }
       }

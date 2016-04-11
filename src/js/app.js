@@ -146,7 +146,6 @@
         hero.positionAtHome();
         hero.setImage('normal');
         hero.setLives(hero.getLives()-1);
-        console.log(hero.getLives());
         hero.draw();
         isNextLife = true;
       }
@@ -163,6 +162,7 @@
           uicontent.getYouWin().html("Congrats! You Win! Your is score is " + score + ".");
           uicontent.displayYouWin();
           uicontent.displayStartNewGame();
+          hero.positionAtHome();
           score = 0;
           runInterval(false);
         }

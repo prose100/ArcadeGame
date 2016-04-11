@@ -22,9 +22,6 @@ AlienWimpy.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
 
-//fires an alienbullet
 AlienWimpy.prototype.fire = function() {
-  var bullet = new AlienBullet(new Position(Position.prototype.getPositionX.call(this.position),
-                                           Position.prototype.getPositionY.call(this.position)+1));
-  return bullet;
+  return Alien.prototype.fire.call(this);
 }

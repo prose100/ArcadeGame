@@ -21,7 +21,5 @@ AlienStubborn.prototype.draw = function() {
 }
 
 AlienStubborn.prototype.fire = function() {
-  var bullet = new AlienBullet(new Position(Position.prototype.getPositionX.call(this.position),
-                                           Position.prototype.getPositionY.call(this.position)+1));
-  return bullet;
+  return Alien.prototype.fire.call(this);
 }

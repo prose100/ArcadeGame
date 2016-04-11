@@ -14,7 +14,3 @@ function HeroBullet(position) {
 HeroBullet.prototype.draw = function() {
   Character.prototype.draw.call(this);
 }
-
-HeroBullet.prototype.move = function() {
-
-}
