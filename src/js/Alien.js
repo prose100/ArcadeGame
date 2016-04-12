@@ -1,7 +1,6 @@
 //Alien.js creates a generic alien
-function Alien(points, image) {
+function Alien(points) {
   this.points = points;
-  this.image = image;
 }
 
 //AlienWimpy, AlienStubborn, and AlienTitan are descendents of Alien

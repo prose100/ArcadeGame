@@ -1,20 +1,34 @@
 //AlienTitan.js creates an alientitan
 function AlienTitan(position) {
-	var $alientitan = $('<img />', {
+ var points = 50;
+ var direction = 'left';
+ var $normalImage = $('<img />', {
               src: 'img/titan.gif'})
               .addClass(settings.alientitan)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
- var points = 50;
- var direction = 'left';
- var hitImage = $('<img />', {
+ var $hitImage = $('<img />', {
               src: 'img/hit-titan.gif'})
               .addClass(settings.alientitan)
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
 
-  Alien.call(this, points, hitImage);
-  Character.call(this, position, $alientitan, direction);
+  this.normalImage = function() { return $normalImage };
+  this.hitImage = function() { return $hitImage };
+
+  Alien.call(this, points);
+  Character.call(this, position, $normalImage, direction);
+}
+
+//set normal and hit images
+AlienTitan.prototype.setImage = function(type) {
+  Character.prototype.clearImage.call(this);
+  if (type == 'normal') {
+    this.image = this.normalImage();
+  }
+  if (type == 'hit') {
+    this.image = this.hitImage();
+  }
 }
 
 //draws alientitan

@@ -85,7 +85,7 @@ Fleet.prototype.move = function() {
 }
 
 //checks collisions between each of the aliens and each of the herobullets
-Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
+Fleet.prototype.checkCollisions = function(herobullets) {
 	var points = 0;
 
 	if (herobullets.fleet.length>0){
@@ -98,8 +98,8 @@ Fleet.prototype.checkNumberOfCollisions = function(herobullets) {
 					points += this.fleet[i].points;
 					alien = this.fleet[i];
 	
-					setTimeout(continueExecution, 115);
         			//delay so that the alien's hitImage remains on the board for 115ms
+					setTimeout(continueExecution, 200);
 					function continueExecution() {
 			          	alien.image.remove();
 			        }

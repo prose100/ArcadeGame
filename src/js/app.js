@@ -203,7 +203,7 @@
       alienbullets.draw();
 
       //update scoreboard
-      score += aliens.checkNumberOfCollisions(herobullets);
+      score += aliens.checkCollisions(herobullets);
       $("." + settings.score_class).html(score);
       $("." + settings.lives_class).html(hero.getLives());
       $("." + settings.level_class).html(level);

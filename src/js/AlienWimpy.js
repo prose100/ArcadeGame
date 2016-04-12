@@ -16,20 +16,20 @@ function AlienWimpy(position) {
   this.normalImage = function() { return $normalImage };
   this.hitImage = function() { return $hitImage };
 
-  Alien.call(this, points, $hitImage);
+  Alien.call(this, points);
   Character.call(this, position, $normalImage, direction);
 }
 
+//set normal and hit images
 AlienWimpy.prototype.setImage = function(type) {
-    Character.prototype.clearImage.call(this);
-    if (type == 'normal') {
-      this.image = this.normalImage();
-    }
-    if (type == 'hit') {
-      console.log(this.hitImage());
-      this.image = this.hitImage();
-    }
+  Character.prototype.clearImage.call(this);
+  if (type == 'normal') {
+    this.image = this.normalImage();
   }
+  if (type == 'hit') {
+    this.image = this.hitImage();
+  }
+}
 
 //draws an alienwimpy
 AlienWimpy.prototype.draw = function() {
