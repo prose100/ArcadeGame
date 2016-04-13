@@ -1,8 +1,6 @@
 //Bullet.js creates a generic bullet
-function Bullet(direction) {
-	this.direction = direction;
+function Bullet() {
 }
 
 //AlienBullet and HeroBullet are descendents of Bullet
-Bullet.prototype = Object.create(AlienBullet.prototype);
-Bullet.prototype = Object.create(HeroBullet.prototype);
+Bullet.prototype = Object.create(Character.prototype);

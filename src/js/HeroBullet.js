@@ -10,6 +10,8 @@ function HeroBullet(position) {
 	Character.call(this, position, $herobullet, direction);
 }
 
+HeroBullet.prototype = Object.create(Bullet.prototype);
+
 //draw herobullet on gameboard
 HeroBullet.prototype.draw = function() {
   Character.prototype.draw.call(this);

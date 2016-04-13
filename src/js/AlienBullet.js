@@ -10,6 +10,8 @@ function AlienBullet(position) {
 	Character.call(this, position, $alienbullet, direction);
 }
 
+AlienBullet.prototype = Object.create(Bullet.prototype);
+
 //draw alienbullet on the gameboard
 AlienBullet.prototype.draw = function() {
   Character.prototype.draw.call(this);

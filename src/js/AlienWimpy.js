@@ -20,6 +20,8 @@ function AlienWimpy(position) {
   Character.call(this, position, $normalImage, direction);
 }
 
+AlienWimpy.prototype = Object.create(Alien.prototype);
+
 //set normal and hit images
 AlienWimpy.prototype.setImage = function(type) {
   Character.prototype.clearImage.call(this);

@@ -39,6 +39,8 @@
     var score = 0;
     var lives = 3;
     var hero = new Hero(lives);
+    console.log(hero);
+    console.log(hero.getLives());
     var uicontent = new UI(); 
     var aliens, alienbullets, herobullets;
     var isNewGame = true;
@@ -104,6 +106,7 @@
     //play() starts and stops depending on input to runInterval()
     function play() {
       //methods that take place if hero dies or user quits
+
       if (hero.getLives() == 0 || quit == true) {
         clearBoard();
         clearHero();
@@ -120,6 +123,7 @@
       //new characters are created if game, level, or life is new
       if (isNewGame == true || isNewLevel == true || isNextLife == true) {
         aliens = createFleet(level);
+        console.log(aliens)
         herobullets = new Fleet([]);
         alienbullets = new Fleet([]);
         isNewGame = false;

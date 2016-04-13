@@ -38,6 +38,7 @@ Fleet.prototype.move = function() {
 	var i=0;
 	for (i; i<this.fleet.length; i++) {
 		switch (this.fleet[i].direction) {
+			
 			case 'left':
 				if ((Position.prototype.getPositionX.call(this.fleet[i].position)) == 1) {
 		    	Position.prototype.setPositionY.call(this.fleet[i].position, 
@@ -47,7 +48,8 @@ Fleet.prototype.move = function() {
 					Position.prototype.setPositionX.call(this.fleet[i].position, 
 		      (Position.prototype.getPositionX.call(this.fleet[i].position)) - 1)
 				}
-		    break;
+		  break;
+
 			case 'right':
 				if ((Position.prototype.getPositionX.call(this.fleet[i].position)) == 19) {
 		    	Position.prototype.setPositionY.call(this.fleet[i].position, 
@@ -57,29 +59,31 @@ Fleet.prototype.move = function() {
 					Position.prototype.setPositionX.call(this.fleet[i].position, 
 		      (Position.prototype.getPositionX.call(this.fleet[i].position)) + 1)
 				}
-		    break;
+		  break;
+
 		  case 'up':
 				Position.prototype.setPositionY.call(this.fleet[i].position, 
 	      (Position.prototype.getPositionY.call(this.fleet[i].position)) - 1)
 
 	      if ((Position.prototype.getPositionY.call(this.fleet[i].position)) == 1) {
 	      	if (i > -1) {
-					  this.fleet[i].image.remove();
-					  this.fleet.splice(i, 1);
+						this.fleet[i].image.remove();
+						this.fleet.splice(i, 1);
 					};
-	      }
-		    break;
+	     	}
+		  break;
+
 		  case 'down':
 				Position.prototype.setPositionY.call(this.fleet[i].position, 
 	      (Position.prototype.getPositionY.call(this.fleet[i].position)) + 1)
 
 	      if ((Position.prototype.getPositionY.call(this.fleet[i].position)) == 20) {
 	      	if (i > -1) {
-					  this.fleet[i].image.remove();
-					  this.fleet.splice(i, 1);
+						this.fleet[i].image.remove();
+						this.fleet.splice(i, 1);
 					};
 	      }
-		    break;
+		  break;
 		}
 	}
 }
@@ -98,7 +102,7 @@ Fleet.prototype.checkCollisions = function(herobullets) {
 					points += this.fleet[i].points;
 					alien = this.fleet[i];
 	
-        			//delay so that the alien's hitImage remains on the board for 115ms
+        	//delay so that the alien's hitImage remains on the board for 115ms
 					setTimeout(continueExecution, 200);
 					function continueExecution() {
 			          	alien.image.remove();

@@ -6,9 +6,7 @@ function Character(position, image, direction) {
 }
 
 //Hero, Alien, and Bullet are descendents of Character
-Character.prototype = Object.create(Hero.prototype);
-Character.prototype = Object.create(Alien.prototype);
-Character.prototype = Object.create(Bullet.prototype);
+
 
 //getter
 Character.prototype.getPosition = function() {
@@ -16,7 +14,12 @@ Character.prototype.getPosition = function() {
 }
 
 Character.prototype.clearImage = function() {
-    this.image.css({'display': 'none'});
+  this.image.css({'display': 'none'});
+}
+
+Character.prototype.setImage = function(image) {
+	console.log(image);
+  this.image = image;
 }
 
 //draws a character

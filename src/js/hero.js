@@ -8,19 +8,23 @@ function Hero(lives) {
               .css({'position':'absolute', 'display': 'none'})
               .appendTo($('.gameBoard'));
   var $hitImage = $('<img />', {
-                src: 'img/explosion.gif'})
-                .addClass(settings.hero_class)
-                .css({'position':'absolute', 'display': 'none'})
-                .appendTo($('.gameBoard'));
+              src: 'img/explosion.gif'})
+              .addClass(settings.hero_class)
+              .css({'position':'absolute', 'display': 'none'})
+              .appendTo($('.gameBoard'));
+  var direction = "left";
   
   this.normalImage = function() { return $normalImage } 
   this.hitImage = function() { return $hitImage }
 
-  Character.call(this, position, $normalImage);
+  Character.call(this, position, $normalImage, direction);
   }
+
+  Hero.prototype = Object.create(Character.prototype);
 
   //getter and setter of lives
   Hero.prototype.getLives = function() {
+    console.log('hi');
     return this.lives;
   }
 
